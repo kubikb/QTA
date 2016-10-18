@@ -1,5 +1,11 @@
 language: r
 
+addons:
+  apt:
+    packages:
+      - python2.7
+      - python-pip
+      
 before_install:
 - cp clustering/* .
 - cp sentiment_analysis/* .
