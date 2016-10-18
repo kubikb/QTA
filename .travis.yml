@@ -13,7 +13,7 @@ before_install:
 - cp sentiment_analysis/* .
 - cp supervised_learning/* .
 - cp unsupervised_learning/* .
-- pip install requests beautifulsoup4
+- sudo pip install requests beautifulsoup4
 
 install:
 - for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap SnowballC; do R -e "install.packages('$package')"; done 
