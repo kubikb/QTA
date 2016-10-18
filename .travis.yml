@@ -10,6 +10,8 @@ before_install:
 - cp clustering/* .
 - cp sentiment_analysis/* .
 - cp supervised_learning/* .
+- cp unsupervised_learning/* .
+- pip install requests beautifulsoup4
 
 install:
 - for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap SnowballC; do R -e "install.packages('$package')"; done 
@@ -19,3 +21,4 @@ script:
 - Rscript wikipedia_analyzer.R
 - Rscript sentiment_analysis.R
 - Rscript supervised_learning.R
+- python napimigrans_parser.py
