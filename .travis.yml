@@ -6,7 +6,7 @@ before_install:
 - cp supervised_learning/* .
 
 install:
-- for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap; do '$package'; echo R -e "install.packages('$package')"; done 
+- for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap; do R -e "install.packages('$package')"; done 
 
 script:
 - Rscript wikipedia_parser.R
