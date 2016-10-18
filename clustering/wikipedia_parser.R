@@ -17,7 +17,9 @@ num<-500
 wiki_data<-data.frame()
 
 # A Wikipedia oldalak adatainak osszegyujtese egy ciklusban
+print("Parsing in progress...")
 for (i in 1:num){
+  print(i)
   # A random Wikipedia oldalt generalo webcim megnyitasa
   random_wikipage<-read_html("https://en.wikipedia.org/wiki/Special:Random")
   
@@ -48,5 +50,6 @@ for (i in 1:num){
   wiki_data<-rbind(wiki_data,temp)
 }
 
+print("Parsing successful, writing to file...")
 # A Wikipedia oldalak kinyert tartalmanak fajlba irasa
 write.csv(wiki_data, "wiki_corpus.csv")

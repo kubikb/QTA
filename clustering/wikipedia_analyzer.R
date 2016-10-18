@@ -3,6 +3,9 @@ require(tm)
 
 # A szovegkorpuszt tartalmazo fajl megnyitasa
 corpus <- read.csv("http://qta.tk.mta.hu/uploads/files/wiki_corpus.csv")
+print("Database successfully downloaded!")
+
+corpus$text<-iconv(enc2utf8(as.character(corpus$text)),sub="byte")
 
 # Szures az elso szaz elemre
 corpus <- corpus[1:100, ]
@@ -11,16 +14,17 @@ corpus <- corpus[1:100, ]
 wiki_corpus<-VCorpus(VectorSource(corpus$text))
 
 # A folosleges whitespace-ek eltavolitasa
-wiki_corpus<- tm_map(wiki_corpus, stripWhitespace)
+wiki_corpus<- tm_map(wiki_corpus, stripWhitespace, mc.cores=1)
 
 # Kisbetusites
-wiki_corpus <- tm_map(wiki_corpus, content_transformer(tolower))
+wiki_corpus <- tm_map(wiki_corpus, content_transformer(tolower), mc.cores=1)
 
 # Stopszavak eltavolitasa
-wiki_corpus <- tm_map(wiki_corpus, removeWords, stopwords("english"))
+wiki_corpus <- tm_map(wiki_corpus, removeWords, stopwords("english"), mc.cores=1)
 
 # Szotovezes
-wiki_corpus <- tm_map(wiki_corpus, stemDocument)
+wiki_corpus <- tm_map(wiki_corpus, stemDocument, mc.cores=1)
+print("Text preprocessing has been successful!")
 
 # Dokumentum-kifejezes matrix kialakitasa
 wiki_dtm <- DocumentTermMatrix(wiki_corpus,
@@ -29,6 +33,7 @@ wiki_dtm <- DocumentTermMatrix(wiki_corpus,
 
 # Dokumentumok cimeinek hozzarendelese
 rownames(wiki_dtm) <- corpus$title
+print("Document-term matrix successfully obtained!")
 
 # Szorvanyos elemek kiszurese
 wiki_dtm <- removeSparseTerms(wiki_dtm, 0.95)
@@ -37,9 +42,11 @@ wiki_dtm <- removeSparseTerms(wiki_dtm, 0.95)
 findFreqTerms(wiki_dtm)
 
 # Hiearchikus klaszterezes
+print("Clustering in progress...")
 wiki_dist <- dist(wiki_dtm, method = "euclidean")
 fit <- hclust(wiki_dist, method="ward") 
 plot(fit)
+print("Clustering successful!")
 
 # A fa 5 csoportra valo vagasa
 groups <- cutree(fit, k=8)
