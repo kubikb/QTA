@@ -5,6 +5,8 @@ require(tm)
 corpus <- read.csv("http://qta.tk.mta.hu/uploads/files/wiki_corpus.csv")
 print("Database successfully downloaded!")
 
+corpus$text<-iconv(enc2utf8(as.character(corpus$text)),sub="byte")
+
 # Szures az elso szaz elemre
 corpus <- corpus[1:100, ]
 

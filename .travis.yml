@@ -2,20 +2,11 @@ language: r
 
 before_install:
 - cp clustering/* .
-- cp named_entity_recognition/* .
 - cp sentiment_analysis/* .
 - cp supervised_learning/* .
 
 install:
-- R -e "install.packages('xgboost')"
-- R -e "install.packages('tm')"
-- R -e "install.packages('readr')"
-- R -e "install.packages('wordcloud')"
-- R -e "install.packages('rvest')"
-- R -e "install.packages('RCurl')"
-- R -e "install.packages('openNLP')"
-- R -e "install.packages('NLP')"
-- R -e "install.packages('qdap')"
+- for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap; do '$package'; echo R -e "install.packages('$package')"; done 
 
 script:
 - Rscript wikipedia_parser.R
