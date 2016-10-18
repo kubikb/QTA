@@ -3,5 +3,8 @@ before_install:
 - cd supervised_learning
 install:
 - R -e "install.packages('xgboost')"
+- R -e "install.packages('tm')"
+- R -e "install.packages('readr')"
+- R -e "install.packages('wordcloud')"
 script:
 - Rscript supervised_learning.R
