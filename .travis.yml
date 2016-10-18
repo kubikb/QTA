@@ -1,5 +1,7 @@
 language: r
 before_install:
 - cd supervised_learning
+install:
+- R -e "install.packages('xgboost')"
 script:
 - Rscript supervised_learning.R
