@@ -1,0 +1,5 @@
+language: r
+before_install:
+- cd supervised_learning
+script:
+- Rscript supervised_learning.R
