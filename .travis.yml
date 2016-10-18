@@ -20,6 +20,5 @@ install:
 script:
 - Rscript wikipedia_parser.R
 - Rscript wikipedia_analyzer.R
-- Rscript rand_paul_filibuster.R
 - Rscript sentiment_analysis.R
 - Rscript supervised_learning.R

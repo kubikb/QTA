@@ -11,6 +11,7 @@ temp <- tempfile()
 download.file("http://congressionalbills.org/billfiles/bills93-113.zip", temp)
 congressData <- read_delim(unz(temp, "bills93-113.txt"), delim="\t")
 unlink(temp)
+print("Database successfully downloaded!")
 
 #Szures a 113. kongresszusra, a valos kozpolitikai kodokra, illetve az irrelevans valtozok kiszurese
 congressData<-congressData[congressData$Cong=="113" & congressData$Major!="99",
@@ -38,9 +39,13 @@ titleCorpus <- tm_map(titleCorpus, removeWords, stopwords("english"))
 #Irasjelek eltavolitasa
 titleCorpus <- tm_map(titleCorpus, removePunctuation)
 
+print("Text preprocessing has been successful!")
+
 #A dokumentum-kifejezés mátrix kialakítása
 titleDTMatrix <- DocumentTermMatrix(titleCorpus)
 titleDTMatrix <- data.matrix(titleDTMatrix)
+
+print("Document-term matrix successfully obtained!")
 
 #Kifejezes gyakorisagi matrix eloallitasa
 termFrequencies <- colSums(titleDTMatrix)
@@ -59,6 +64,7 @@ dtrain <- xgb.DMatrix(train, label = congressData$Major2[train_ind])
 dtest <- xgb.DMatrix(test, label = congressData$Major2[-train_ind])
 
 #Felugyelt tanulasi modell epitese
+print("Model training in progress...")
 model <- xgb.train(data      = dtrain,
                  booster     = "gbtree",
                  num_class   = 20,
@@ -68,7 +74,9 @@ model <- xgb.train(data      = dtrain,
                  watchlist   = list(eval = dtest, train = dtrain),
                  early.stop.round = 10,
                  set.seed        = 1)
+print("Model training has been successful!")
 
 # Becsult osztalyhovatartozasok kinyerese a tanito es a teszthalmazra
 train_predictions <- predict(model, dtrain)
 test_predictions <- predict(model, dtest)
+print("Predictions successfully obtained!")

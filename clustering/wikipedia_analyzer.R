@@ -12,16 +12,16 @@ corpus <- corpus[1:100, ]
 wiki_corpus<-VCorpus(VectorSource(corpus$text))
 
 # A folosleges whitespace-ek eltavolitasa
-wiki_corpus<- tm_map(wiki_corpus, stripWhitespace)
+wiki_corpus<- tm_map(wiki_corpus, stripWhitespace, mc.cores=1)
 
 # Kisbetusites
-wiki_corpus <- tm_map(wiki_corpus, content_transformer(tolower))
+wiki_corpus <- tm_map(wiki_corpus, content_transformer(tolower), mc.cores=1)
 
 # Stopszavak eltavolitasa
-wiki_corpus <- tm_map(wiki_corpus, removeWords, stopwords("english"))
+wiki_corpus <- tm_map(wiki_corpus, removeWords, stopwords("english"), mc.cores=1)
 
 # Szotovezes
-wiki_corpus <- tm_map(wiki_corpus, stemDocument)
+wiki_corpus <- tm_map(wiki_corpus, stemDocument, mc.cores=1)
 print("Text preprocessing has been successful!")
 
 # Dokumentum-kifejezes matrix kialakitasa
