@@ -1,5 +1,7 @@
 language: r
 
+sudo: required
+
 addons:
   apt:
     packages:
