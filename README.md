@@ -1,3 +1,4 @@
+[![Build Status](https://api.travis-ci.org/kubikb/QTA.svg?branch=travis_testing)](https://travis-ci.org/kubikb/QTA)
 # QTA anyagok
 
 Jelen Git repository a Kvantitatív szövegelemzés és szövegbányászat a politikatudományban c. tankönyv (http://qta.tk.mta.hu/) anyagához kapcsolódó, illetve azokat kiegészítő forráskódokat tartalmazza. 
