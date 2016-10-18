@@ -1,10 +1,25 @@
 language: r
+
 before_install:
-- cd supervised_learning
+- cp clustering/* .
+- cp named_entity_recognition/* .
+- cp sentiment_analysis/* .
+- cp supervised_learning/* .
+
 install:
 - R -e "install.packages('xgboost')"
 - R -e "install.packages('tm')"
 - R -e "install.packages('readr')"
 - R -e "install.packages('wordcloud')"
+- R -e "install.packages('rvest')"
+- R -e "install.packages('RCurl')"
+- R -e "install.packages('openNLP')"
+- R -e "install.packages('NLP')"
+- R -e "install.packages('qdap')"
+
 script:
+- Rscript wikipedia_parser.R
+- Rscript wikipedia_analyzer.R
+- Rscript rand_paul_filibuster.R
+- Rscript sentiment_analysis.R
 - Rscript supervised_learning.R
