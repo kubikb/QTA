@@ -9,6 +9,8 @@ addons:
       - python-pip
       - python-matplotlib
       - python-pandas
+      - python-numpy
+      - python-scipy
       - wget
       
 before_install:
