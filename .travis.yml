@@ -11,6 +11,7 @@ addons:
       - python-pandas
       - python-numpy
       - python-scipy
+      - python-tk
       - wget
       
 before_install:
