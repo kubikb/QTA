@@ -7,13 +7,15 @@ addons:
     packages:
       - python2.7
       - python-pip
+      - python-matplotlib
+      - python-pandas
       
 before_install:
 - cp clustering/* .
 - cp sentiment_analysis/* .
 - cp supervised_learning/* .
 - cp unsupervised_learning/* .
-- sudo pip install requests beautifulsoup4
+- sudo pip install -r requirements.txt
 
 install:
 - for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap SnowballC; do R -e "install.packages('$package')"; done 
@@ -24,3 +26,4 @@ script:
 - Rscript sentiment_analysis.R
 - Rscript supervised_learning.R
 - python napimigrans_parser.py
+- sudo runipy napimigrans_analysis.ipynb
