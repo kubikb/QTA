@@ -11,7 +11,7 @@ clean<-function(text){
 }
 
 # A veletlenszeruen kivalasztando Wikipedia oldalak szama
-num<-500
+num<-200
 
 # (Egyelore) ures data frame a Wikipedia oldalak adatainak eltarolasara
 wiki_data<-data.frame()
