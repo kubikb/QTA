@@ -9,6 +9,7 @@ addons:
       - python-pip
       - python-matplotlib
       - python-pandas
+      - wget
       
 before_install:
 - cp clustering/* .
@@ -16,6 +17,8 @@ before_install:
 - cp supervised_learning/* .
 - cp unsupervised_learning/* .
 - sudo pip install -r requirements.txt
+- wget http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv
+- sed 's|http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv|/home/travis/napimigrans_corpus.csv|' napimigrans_analysis.ipynb > napimigrans_analysis.ipynb
 
 install:
 - for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap SnowballC; do R -e "install.packages('$package')"; done 
