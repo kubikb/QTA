@@ -18,7 +18,7 @@ before_install:
 - cp unsupervised_learning/* .
 - sudo pip install -r requirements.txt
 - wget http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv
-- sed 's|http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv|/home/travis/napimigrans_corpus.csv|' napimigrans_analysis.ipynb > napimigrans_analysis.ipynb
+- sed 's|http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv|/home/travis/napimigrans_corpus.csv|' napimigrans_analysis.ipynb > napimigrans_analysis_travis.ipynb
 
 install:
 - for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap SnowballC; do R -e "install.packages('$package')"; done 
@@ -29,4 +29,4 @@ script:
 - Rscript sentiment_analysis.R
 - Rscript supervised_learning.R
 - python napimigrans_parser.py
-- sudo runipy napimigrans_analysis.ipynb
+- sudo runipy napimigrans_analysis_travis.ipynb
