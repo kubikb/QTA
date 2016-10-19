@@ -1,9 +1,27 @@
 language: r
 
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - python2.7
+      - python-pip
+      - python-matplotlib
+      - python-pandas
+      - python-numpy
+      - python-scipy
+      - python-tk
+      - wget
+      
 before_install:
 - cp clustering/* .
 - cp sentiment_analysis/* .
 - cp supervised_learning/* .
+- cp unsupervised_learning/* .
+- sudo pip install -r requirements.txt
+- wget http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv
+- sed 's|http://qta.tk.mta.hu/uploads/files/napimigrans_corpus.csv|napimigrans_corpus.csv|' napimigrans_analysis.ipynb > napimigrans_analysis_travis.ipynb
 
 install:
 - for package in xgboost tm readr wordcloud rvest RCurl openNLP NLP qdap SnowballC; do R -e "install.packages('$package')"; done 
@@ -13,3 +31,5 @@ script:
 - Rscript wikipedia_analyzer.R
 - Rscript sentiment_analysis.R
 - Rscript supervised_learning.R
+- python napimigrans_parser.py
+- sudo runipy napimigrans_analysis_travis.ipynb
