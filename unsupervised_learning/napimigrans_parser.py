@@ -55,6 +55,6 @@ for direct_url in direct_urls:
 print u"Az összegyűjtött cikkszövegek száma: %s" %len(article_texts)
 
 # A művelet eredményének elmentése. Ne felejtsük el módosítani a fájl (leendő) helyét!
-with open("napimigrans_corpus.csv", "wb") as f:
+with open("napimigrans_corpus_data.csv", "wb") as f:
     writer = csv.writer(f, delimiter="\t")
     writer.writerows(map(lambda x: [x[0], x[1].encode("utf-8")], article_texts))
